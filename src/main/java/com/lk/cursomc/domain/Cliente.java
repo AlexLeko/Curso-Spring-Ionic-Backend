@@ -1,5 +1,6 @@
 package com.lk.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.lk.cursomc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Cliente implements Serializable {
 
     private Integer tipo;
 
+    @JsonManagedReference   // cliente pode serializar os endereços
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
