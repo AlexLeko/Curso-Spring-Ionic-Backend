@@ -20,6 +20,10 @@ public class Estado implements Serializable {
     private List<Cidade> cidades = new ArrayList<>();
 
 
+    // ===================
+    //     CONSTRUCTORS
+    // ===================
+
     public Estado() {
     }
 
@@ -27,6 +31,12 @@ public class Estado implements Serializable {
         this.id = id;
         this.nome = nome;
     }
+
+
+
+    // ===================
+    // GETTERS AND SETTERS
+    // ===================
 
     public Integer getId() {
         return id;
@@ -51,6 +61,11 @@ public class Estado implements Serializable {
     public void setCidades(List<Cidade> cidades) {
         this.cidades = cidades;
     }
+
+
+    // ===================
+    // EQUALS AND HASHCODE
+    // ===================
 
     @Override
     public boolean equals(Object o) {

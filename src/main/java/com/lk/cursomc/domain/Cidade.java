@@ -19,6 +19,11 @@ public class Cidade implements Serializable {
     private Estado estado;
 
 
+
+    // ===================
+    //     CONSTRUCTORS
+    // ===================
+
     public Cidade() {
     }
 
@@ -27,6 +32,11 @@ public class Cidade implements Serializable {
         this.nome = nome;
         this.estado = estado;
     }
+
+
+    // ===================
+    // GETTERS AND SETTERS
+    // ===================
 
     public Integer getId() {
         return id;
@@ -51,6 +61,12 @@ public class Cidade implements Serializable {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
+
+
+
+    // ===================
+    // EQUALS AND HASHCODE
+    // ===================
 
     @Override
     public boolean equals(Object o) {

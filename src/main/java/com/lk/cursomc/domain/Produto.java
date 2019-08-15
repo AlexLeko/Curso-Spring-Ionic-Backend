@@ -28,6 +28,11 @@ public class Produto implements Serializable {
     private List<Categoria> categorias = new ArrayList<>();
 
 
+
+    // ===================
+    //     CONSTRUCTORS
+    // ===================
+
     public Produto() {
     }
 
@@ -36,6 +41,11 @@ public class Produto implements Serializable {
         this.nome = nome;
         this.preco = preco;
     }
+
+
+    // ===================
+    // GETTERS AND SETTERS
+    // ===================
 
     public Integer getId() {
         return id;
@@ -69,6 +79,11 @@ public class Produto implements Serializable {
         this.categorias = categorias;
     }
 
+
+
+    // ===================
+    // EQUALS AND HASHCODE
+    // ===================
 
     @Override
     public boolean equals(Object o) {
