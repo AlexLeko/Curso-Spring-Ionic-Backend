@@ -2,10 +2,7 @@ package com.lk.cursomc.domain;
 
 import com.lk.cursomc.domain.enums.TipoCliente;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
@@ -25,8 +22,11 @@ public class Cliente implements Serializable {
 
     private Integer tipo;
 
+    @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
+    @ElementCollection
+    @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
 
