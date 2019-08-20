@@ -1,9 +1,10 @@
 package com.lk.cursomc.domain.enums;
 
-public enum TipoCliente {
+public enum EstadoPagamento {
 
-    PESSOA_FISICA(1, "Pessoa Física"),
-    PESSOA_JURIDICA(2, "Pessoa Jurídica");
+    PENDENTE(1, "Pendente"),
+    QUITADO(2, "Quitado"),
+    CANCELADO(2, "Cancelado");
 
     private int codigo;
     private String descricao;
@@ -13,7 +14,7 @@ public enum TipoCliente {
     //     CONSTRUCTORS
     // ===================
 
-    TipoCliente(Integer codigo, String descricao) {
+    EstadoPagamento(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
@@ -36,11 +37,11 @@ public enum TipoCliente {
     //     COMPLEMENTS
     // ===================
 
-    public static TipoCliente toEnum(Integer cod){
+    public static EstadoPagamento toEnum(Integer cod){
 
         if (cod == null) return null;
 
-        for (TipoCliente cli : TipoCliente.values()){
+        for (EstadoPagamento cli : EstadoPagamento.values()){
             if (cod.equals(cli.getCodigo())){
                 return cli;
             }

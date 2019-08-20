@@ -1,6 +1,7 @@
 package com.lk.cursomc;
 
 import com.lk.cursomc.domain.*;
+import com.lk.cursomc.domain.enums.EstadoPagamento;
 import com.lk.cursomc.domain.enums.TipoCliente;
 import com.lk.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +29,11 @@ public class CursomcApplication implements CommandLineRunner {
 	private ClienteRepository _clienteRepository;
 	@Autowired
 	private EnderecoRepository _enderecoRepository;
+	@Autowired
+	private PedidoRepository _pedidoRepository;
+	@Autowired
+	private PagamentoRepository _pagamentoRepository;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -84,6 +91,25 @@ public class CursomcApplication implements CommandLineRunner {
 
 		_clienteRepository.saveAll(Arrays.asList(cli1));
 		_enderecoRepository.saveAll(Arrays.asList(end1, end2));
+
+
+		// PEDIDO - PAGAMENTO
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, end1);
+		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cli1, end2);
+
+		Pagamento pagto1 = new PagamentoCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagto1);
+
+		Pagamento pagto2 = new PagamentoBoleto(null, EstadoPagamento.PENDENTE, ped2, null, sdf.parse("20/10/2017 00:00"));
+		ped2.setPagamento(pagto2);
+
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+
+		_pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+		_pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 
 	}
 
