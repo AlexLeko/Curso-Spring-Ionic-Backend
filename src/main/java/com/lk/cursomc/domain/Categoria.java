@@ -24,7 +24,10 @@ public class Categoria implements Serializable {
 
 
 
-    // CONTRUCTOR
+    // ===================
+    //     CONSTRUCTORS
+    // ===================
+
     public Categoria() {
     }
 
@@ -34,7 +37,10 @@ public class Categoria implements Serializable {
     }
 
 
+
+    // ===================
     // GETTERS AND SETTERS
+    // ===================
 
     public Integer getId() {
         return id;
@@ -59,6 +65,12 @@ public class Categoria implements Serializable {
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
+
+
+
+    // ===================
+    // EQUALS AND HASHCODE
+    // ===================
 
     @Override
     public boolean equals(Object o) {

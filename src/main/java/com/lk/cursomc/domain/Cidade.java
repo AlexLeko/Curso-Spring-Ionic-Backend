@@ -1,15 +1,13 @@
 package com.lk.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Produto implements Serializable {
+public class Cidade implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -18,14 +16,10 @@ public class Produto implements Serializable {
 
     private String nome;
 
-    private Double preco;
-
-    @JsonBackReference
-    @ManyToMany
-    @JoinTable(name = "PRODUTO_CATEGORIA",
-        joinColumns = @JoinColumn(name = "produto_id"),
-        inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-    private List<Categoria> categorias = new ArrayList<>();
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
+    private Estado estado;
 
 
 
@@ -33,13 +27,13 @@ public class Produto implements Serializable {
     //     CONSTRUCTORS
     // ===================
 
-    public Produto() {
+    public Cidade() {
     }
 
-    public Produto(Integer id, String nome, Double preco) {
+    public Cidade(Integer id, String nome, Estado estado) {
         this.id = id;
         this.nome = nome;
-        this.preco = preco;
+        this.estado = estado;
     }
 
 
@@ -63,20 +57,12 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    public Double getPreco() {
-        return preco;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }
-
-    public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
 
@@ -89,8 +75,8 @@ public class Produto implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Produto produto = (Produto) o;
-        return Objects.equals(id, produto.id);
+        Cidade cidade = (Cidade) o;
+        return Objects.equals(id, cidade.id);
     }
 
     @Override
