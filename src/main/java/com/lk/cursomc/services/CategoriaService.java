@@ -21,5 +21,9 @@ public class CategoriaService {
     }
 
 
+    public Categoria insert(Categoria categoria){
+        categoria.setId(null);
+        return _repository.save(categoria);
+    }
 
 }
