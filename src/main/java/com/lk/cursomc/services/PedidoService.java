@@ -14,7 +14,7 @@ public class PedidoService {
     @Autowired
     private PedidoRepository _repository;
 
-    public Pedido buscar(Integer id){
+    public Pedido find(Integer id){
         Optional<Pedido> pedido = _repository.findById(id);
         return pedido.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! ID: " + id + " , TIPO: " + Pedido.class.getName()));

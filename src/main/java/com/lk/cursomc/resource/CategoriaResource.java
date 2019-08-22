@@ -20,9 +20,9 @@ public class CategoriaResource {
 
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id) {
-        Categoria categoria = _service.buscar(id);
-        return ResponseEntity.ok().body(categoria);
+    public ResponseEntity<Categoria> find(@PathVariable Integer id) {
+        Categoria categoria = _service.find(id);
+        return ResponseEntity.ok().body(categoria); // status: 200 OK
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -34,8 +34,18 @@ public class CategoriaResource {
                     .buildAndExpand(categoria.getId())
                     .toUri();
 
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).build(); // retorna o endpoint criado.
     }
+
+    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+    public ResponseEntity<Void> update(@RequestBody Categoria categoria, @PathVariable Integer id){
+        categoria.setId(id);
+
+        categoria = _service.update(categoria);
+
+        return ResponseEntity.noContent().build();  // status: 204 created
+    }
+
 
 
 
