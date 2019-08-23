@@ -46,7 +46,12 @@ public class CategoriaResource {
         return ResponseEntity.noContent().build();  // status: 204 created
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        _service.delete(id);
 
+        return ResponseEntity.noContent().build();
+    }
 
 
 }
