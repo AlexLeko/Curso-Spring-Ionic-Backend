@@ -1,9 +1,8 @@
 package com.lk.cursomc.resource;
 
-import com.lk.cursomc.domain.Categoria;
 import com.lk.cursomc.domain.Cliente;
-import com.lk.cursomc.dto.CategoriaDTO;
 import com.lk.cursomc.dto.ClienteDTO;
+import com.lk.cursomc.dto.ClienteNewDTO;
 import com.lk.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,18 +29,18 @@ public class ClienteResource {
         return ResponseEntity.ok().body(cliente);
     }
 
-//    @RequestMapping(method = RequestMethod.POST)
-//    public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO){
-//        Categoria categoria = _service.fromDTO(categoriaDTO);
-//        categoria = _service.insert(categoria);
-//
-//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-//                .path("/{id}")
-//                .buildAndExpand(categoria.getId())
-//                .toUri();
-//
-//        return ResponseEntity.created(uri).build(); // retorna o endpoint criado.
-//    }
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO clienteDTO){
+        Cliente cliente = _service.fromDTO(clienteDTO);
+        cliente = _service.insert(cliente);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(cliente.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).build(); // retorna o endpoint criado.
+    }
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id){

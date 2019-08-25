@@ -1,7 +1,6 @@
 package com.lk.cursomc.services;
 
 import com.lk.cursomc.domain.Categoria;
-import com.lk.cursomc.domain.Cliente;
 import com.lk.cursomc.dto.CategoriaDTO;
 import com.lk.cursomc.repositories.CategoriaRepository;
 import com.lk.cursomc.services.exceptions.DataIntegrityException;
