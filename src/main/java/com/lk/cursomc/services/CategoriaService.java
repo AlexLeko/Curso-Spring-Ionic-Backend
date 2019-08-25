@@ -1,6 +1,7 @@
 package com.lk.cursomc.services;
 
 import com.lk.cursomc.domain.Categoria;
+import com.lk.cursomc.domain.Cliente;
 import com.lk.cursomc.dto.CategoriaDTO;
 import com.lk.cursomc.repositories.CategoriaRepository;
 import com.lk.cursomc.services.exceptions.DataIntegrityException;
@@ -34,8 +35,14 @@ public class CategoriaService {
     }
 
     public Categoria update(Categoria categoria){
-        find(categoria.getId());
+        Categoria newCategoria = find(categoria.getId());
+        updateData(newCategoria, categoria);
+
         return _repository.save(categoria);
+    }
+
+    private void updateData(Categoria newCategoria, Categoria categoria) {
+        newCategoria.setNome(categoria.getNome());
     }
 
     public void delete(Integer id){
