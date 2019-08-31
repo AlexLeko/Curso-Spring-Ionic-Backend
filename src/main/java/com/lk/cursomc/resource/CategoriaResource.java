@@ -48,7 +48,7 @@ public class CategoriaResource {
         categoria.setId(id);
         categoria = _service.update(categoria);
 
-        return ResponseEntity.noContent().build();  // status: 204 created
+        return ResponseEntity.noContent().build();  // status: 204 | criado com sucesso, sem retorno na resposta.
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
