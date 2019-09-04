@@ -1,8 +1,6 @@
 package com.lk.cursomc.resource;
 
-import com.lk.cursomc.domain.Categoria;
 import com.lk.cursomc.domain.Pedido;
-import com.lk.cursomc.dto.CategoriaDTO;
 import com.lk.cursomc.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
