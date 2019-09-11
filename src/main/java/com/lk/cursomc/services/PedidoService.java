@@ -29,6 +29,8 @@ public class PedidoService {
     private PagamentoRepository _pagamentoRepository;
     @Autowired
     private ItemPedidoRepository _itemPedidoRepository;
+    @Autowired
+    private ClienteService _clienteService;
 
 
 
@@ -45,6 +47,8 @@ public class PedidoService {
         pedido.getPagamento().setEstadoPagamento(EstadoPagamento.PENDENTE);
         pedido.getPagamento().setPedido(pedido);
 
+        pedido.setCliente(_clienteService.find(pedido.getCliente().getId()));
+
         if(pedido.getPagamento() instanceof PagamentoBoleto) {
             PagamentoBoleto pagamento = (PagamentoBoleto) pedido.getPagamento();
             _boletoService.preencherPagamentoBoleto(pagamento, pedido.getInstance());
@@ -56,12 +60,16 @@ public class PedidoService {
 
         for (ItemPedido item : pedido.getItens()) {
             item.setDesconto(0.0);
-            item.setPreco(_produtoService.find(item.getProduto().getId()).getPreco());
+
+            item.setProduto(_produtoService.find(item.getProduto().getId()));
+            item.setPreco(item.getProduto().getPreco());
 
             item.setPedido(pedido);
         }
 
         _itemPedidoRepository.saveAll(pedido.getItens());
+
+        System.out.println(pedido);
 
         return pedido;
     }
