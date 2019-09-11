@@ -24,13 +24,16 @@ public class PedidoService {
     private BoletoService _boletoService;
     @Autowired
     private ProdutoService _produtoService;
+    @Autowired
+    private ClienteService _clienteService;
 
     @Autowired
     private PagamentoRepository _pagamentoRepository;
     @Autowired
     private ItemPedidoRepository _itemPedidoRepository;
+
     @Autowired
-    private ClienteService _clienteService;
+    private EmailService _emailService;
 
 
 
@@ -69,7 +72,11 @@ public class PedidoService {
 
         _itemPedidoRepository.saveAll(pedido.getItens());
 
-        System.out.println(pedido);
+        // teste corpo do E-mail
+        // System.out.println(pedido);
+
+        // teste mock envio de e-mail
+        _emailService.sendOrderConfirmationEmail(pedido);
 
         return pedido;
     }
