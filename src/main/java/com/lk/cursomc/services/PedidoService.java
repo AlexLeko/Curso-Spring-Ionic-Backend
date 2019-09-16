@@ -76,7 +76,10 @@ public class PedidoService {
         // System.out.println(pedido);
 
         // teste mock envio de e-mail
-        _emailService.sendOrderConfirmationEmail(pedido);
+        // _emailService.sendOrderConfirmationEmail(pedido);
+
+        // teste envio de e-mail HTML
+        _emailService.sendOrderConfirmationHtmlEmail(pedido);
 
         return pedido;
     }
