@@ -2,6 +2,7 @@ package com.lk.cursomc.services;
 
 import com.lk.cursomc.domain.*;
 import com.lk.cursomc.domain.enums.EstadoPagamento;
+import com.lk.cursomc.domain.enums.Perfil;
 import com.lk.cursomc.domain.enums.TipoCliente;
 import com.lk.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,18 +113,25 @@ public class DBService {
 
         // CLIENTE - TIPO - TELEFONES - ENDEREÇOS
 
-        Cliente cliente_1 = new Cliente(null, "Maria Silva", "lk.alexds@gmail.com", "123456789",
+        Cliente cliente_1 = new Cliente(null, "Maria Silva", "lk.alexds@gmail.com", "88681638025",
                 TipoCliente.PESSOA_FISICA, _passwordEncoder.encode("123456"));
-
         cliente_1.getTelefones().addAll(Arrays.asList("1111111111", "22222222222"));
+
+        Cliente cliente_2 = new Cliente(null, "Felipe Perez", "lk.alexds@hotmail.com", "45562451093",
+                TipoCliente.PESSOA_FISICA, _passwordEncoder.encode("abc123"));
+
+        cliente_2.getTelefones().addAll(Arrays.asList("1699168090", "1697141010"));
+        cliente_2.addPerfis(Perfil.ADMIN);
 
         Endereco endereco_1 = new Endereco(null, "Rua Flores", "300", "apt 303", "Jardim", "42432433", cliente_1, cidade_1);
         Endereco endereco_2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "42432433", cliente_1, cidade_2);
+        Endereco endereco_3 = new Endereco(null, "Avenida Florinda", "71", null, "Vila", "10111000", cliente_2, cidade_2);
 
         cliente_1.getEnderecos().addAll(Arrays.asList(endereco_1, endereco_2));
+        cliente_2.getEnderecos().addAll(Arrays.asList(endereco_3));
 
-        _clienteRepository.saveAll(Arrays.asList(cliente_1));
-        _enderecoRepository.saveAll(Arrays.asList(endereco_1, endereco_2));
+        _clienteRepository.saveAll(Arrays.asList(cliente_1, cliente_2));
+        _enderecoRepository.saveAll(Arrays.asList(endereco_1, endereco_2, endereco_3));
 
 
         // PEDIDO - PAGAMENTO
