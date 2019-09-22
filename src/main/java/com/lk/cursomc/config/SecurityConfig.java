@@ -1,6 +1,7 @@
 package com.lk.cursomc.config;
 
 import com.lk.cursomc.security.JWTAuthenticationFilter;
+import com.lk.cursomc.security.JWTAuthorizationFilter;
 import com.lk.cursomc.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -68,6 +69,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // registrar o filtro de autenticação
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
 
+        // registrar o filtro de autorização.
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
+
         // garante que o back-end não crie sessão de usuario.
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
@@ -89,8 +93,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
-
-
     }
 
 
