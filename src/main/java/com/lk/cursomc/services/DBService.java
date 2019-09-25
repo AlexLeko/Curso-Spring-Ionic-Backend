@@ -113,11 +113,11 @@ public class DBService {
 
         // CLIENTE - TIPO - TELEFONES - ENDEREÇOS
 
-        Cliente cliente_1 = new Cliente(null, "Maria Silva", "lk.alexds@gmail.com", "88681638025",
+        Cliente cliente_1 = new Cliente(null, "Maria Silva", "lk.alexds@hotmail.com", "88681638025",
                 TipoCliente.PESSOA_FISICA, _passwordEncoder.encode("123456"));
         cliente_1.getTelefones().addAll(Arrays.asList("1111111111", "22222222222"));
 
-        Cliente cliente_2 = new Cliente(null, "Felipe Perez", "lk.alexds@hotmail.com", "45562451093",
+        Cliente cliente_2 = new Cliente(null, "Felipe Perez", "lk.alexds@gmail.com", "45562451093",
                 TipoCliente.PESSOA_FISICA, _passwordEncoder.encode("123456"));
 
         cliente_2.getTelefones().addAll(Arrays.asList("1699168090", "1697141010"));

@@ -71,4 +71,9 @@ public class UserSS implements UserDetails {
         return true;
     }
 
+    // Valida o Perfil de um Usuario.
+    public boolean hasRole(Perfil perfil) {
+        return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
+    }
+
 }

@@ -3,11 +3,14 @@ package com.lk.cursomc.services;
 import com.lk.cursomc.domain.Cidade;
 import com.lk.cursomc.domain.Cliente;
 import com.lk.cursomc.domain.Endereco;
+import com.lk.cursomc.domain.enums.Perfil;
 import com.lk.cursomc.domain.enums.TipoCliente;
 import com.lk.cursomc.dto.ClienteDTO;
 import com.lk.cursomc.dto.ClienteNewDTO;
 import com.lk.cursomc.repositories.ClienteRepository;
 import com.lk.cursomc.repositories.EnderecoRepository;
+import com.lk.cursomc.security.UserSS;
+import com.lk.cursomc.services.exceptions.AuthorizationException;
 import com.lk.cursomc.services.exceptions.DataIntegrityException;
 import com.lk.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,13 @@ public class ClienteService {
     private BCryptPasswordEncoder _passwordEncoder;
 
     public Cliente find(Integer id){
+
+        // Valida consulta, somente para o mesmo Cliente.
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId()) ) {
+            throw new AuthorizationException("Acesso Negado !");
+        }
+
         Optional<Cliente> cliente = _repository.findById(id);
         return cliente.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! ID: " + id + " , TIPO: " + Cliente.class.getName()));
