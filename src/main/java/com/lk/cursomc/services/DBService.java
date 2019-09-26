@@ -97,6 +97,7 @@ public class DBService {
 
 
         // CIDADE X ESTADO
+
         Estado estado_1 = new Estado(null, "Minas Gerais");
         Estado estado_2 = new Estado(null, "São Paulo");
 

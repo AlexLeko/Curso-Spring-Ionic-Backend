@@ -1,5 +1,6 @@
 package com.lk.cursomc.services;
 
+import com.lk.cursomc.domain.Cliente;
 import com.lk.cursomc.domain.ItemPedido;
 import com.lk.cursomc.domain.PagamentoBoleto;
 import com.lk.cursomc.domain.Pedido;
@@ -7,8 +8,13 @@ import com.lk.cursomc.domain.enums.EstadoPagamento;
 import com.lk.cursomc.repositories.ItemPedidoRepository;
 import com.lk.cursomc.repositories.PagamentoRepository;
 import com.lk.cursomc.repositories.PedidoRepository;
+import com.lk.cursomc.security.UserSS;
+import com.lk.cursomc.services.exceptions.AuthorizationException;
 import com.lk.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -82,6 +88,20 @@ public class PedidoService {
         _emailService.sendOrderConfirmationHtmlEmail(pedido);
 
         return pedido;
+    }
+
+    public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+
+        // valida usuario logado.
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Acesso Negado!");
+        }
+
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        Cliente cliente = _clienteService.find(user.getId());
+
+        return _repository.findByCliente(cliente, pageRequest);
     }
 
 }
