@@ -25,6 +25,15 @@ public class AuthResource {
     @Autowired
     private AuthService authService;
 
+    @RequestMapping(value = "/refresh_token", method = RequestMethod.POST)
+    public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
+        UserSS user = UserService.authenticated();
+        String token = jwtUtil.generationToken(user.getUsername());
+
+        response.addHeader("Authorization", "Bearer " + token);
+
+        return ResponseEntity.noContent().build();
+    }
 
     @RequestMapping(value = "/forgot", method = RequestMethod.POST)
     public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO emailDto) {
