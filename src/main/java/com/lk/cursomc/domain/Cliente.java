@@ -44,7 +44,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "PERFIS")
     private Set<Integer> perfis = new HashSet<>();
 
-    private String imageURI;
+//    private String imageURI;
 
 
 
@@ -150,13 +150,13 @@ public class Cliente implements Serializable {
         perfis.add(perfil.getCodigo());
     }
 
-    public String getImageURI() {
-        return imageURI;
-    }
-
-    public void setImageURI(String imageURI) {
-        this.imageURI = imageURI;
-    }
+//    public String getImageURI() {
+//        return imageURI;
+//    }
+//
+//    public void setImageURI(String imageURI) {
+//        this.imageURI = imageURI;
+//    }
 
     // ===================
     // EQUALS AND HASHCODE
