@@ -50,7 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // cadastros permitidos [POST]
     private static final String[] PUBLIC_MATCHERS_POST = {
             "/clientes",
-            "/clientes/picture", // teste mockado
             "/auth/forgot/**"
     };
 

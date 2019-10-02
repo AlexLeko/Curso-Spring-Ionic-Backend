@@ -31,7 +31,7 @@ import java.util.Optional;
 public class ClienteService {
 
     @Autowired
-    private ClienteRepository _repository;
+    private ClienteRepository _clienteRepository;
 
     @Autowired
     private EnderecoRepository _enderecoRepository;
@@ -50,7 +50,7 @@ public class ClienteService {
             throw new AuthorizationException("Acesso Negado !");
         }
 
-        Optional<Cliente> cliente = _repository.findById(id);
+        Optional<Cliente> cliente = _clienteRepository.findById(id);
         return cliente.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! ID: " + id + " , TIPO: " + Cliente.class.getName()));
     }
@@ -58,7 +58,7 @@ public class ClienteService {
     @Transactional
     public Cliente insert(Cliente cliente){
         cliente.setId(null);
-        cliente = _repository.save(cliente);
+        cliente = _clienteRepository.save(cliente);
 
         _enderecoRepository.saveAll(cliente.getEnderecos());
 
@@ -69,7 +69,7 @@ public class ClienteService {
         Cliente newCliente = find(cliente.getId());
         updateData(newCliente, cliente);
 
-        return _repository.save(cliente);
+        return _clienteRepository.save(cliente);
     }
 
     private void updateData(Cliente newCliente, Cliente cliente) {
@@ -81,7 +81,7 @@ public class ClienteService {
         find(id);
 
         try{
-            _repository.deleteById(id);
+            _clienteRepository.deleteById(id);
         }
         catch (DataIntegrityViolationException ex){
             throw new DataIntegrityException("Não é possível excluir um cliente com pedidos em aberto.");
@@ -89,12 +89,12 @@ public class ClienteService {
     }
 
     public List<Cliente> findAll(){
-        return _repository.findAll();
+        return _clienteRepository.findAll();
     }
 
     public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return _repository.findAll(pageRequest);
+        return _clienteRepository.findAll(pageRequest);
     }
 
 
@@ -123,7 +123,19 @@ public class ClienteService {
 
 
     public URI uploadProfilePicture(MultipartFile multipartFile) {
-        return s3Service.uploadFile(multipartFile);
+        // Recuperar o usuario logado
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Acesso Negado !");
+        }
+
+        URI uri = s3Service.uploadFile(multipartFile);
+
+        Cliente cliente = _clienteRepository.findById(user.getId()).get();
+        cliente.setImageURI(uri.toString());
+        _clienteRepository.save(cliente);
+
+        return uri;
     }
 
 

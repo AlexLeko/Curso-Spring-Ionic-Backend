@@ -44,6 +44,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "PERFIS")
     private Set<Integer> perfis = new HashSet<>();
 
+    private String imageURI;
 
 
 
@@ -147,6 +148,14 @@ public class Cliente implements Serializable {
 
     public void addPerfis(Perfil perfil) {
         perfis.add(perfil.getCodigo());
+    }
+
+    public String getImageURI() {
+        return imageURI;
+    }
+
+    public void setImageURI(String imageURI) {
+        this.imageURI = imageURI;
     }
 
     // ===================
