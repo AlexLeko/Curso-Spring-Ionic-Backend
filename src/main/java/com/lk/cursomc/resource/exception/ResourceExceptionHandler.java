@@ -1,7 +1,11 @@
 package com.lk.cursomc.resource.exception;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.lk.cursomc.services.exceptions.AuthorizationException;
 import com.lk.cursomc.services.exceptions.DataIntegrityException;
+import com.lk.cursomc.services.exceptions.FileException;
 import com.lk.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,5 +67,48 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);   // status: 404
     }
 
+    // Tratativa para Upload de Arquivos na AWS.
+    @ExceptionHandler(FileException.class)
+    public ResponseEntity<StandardError> file(FileException exc, HttpServletRequest request){
+        StandardError err = new StandardError(
+                HttpStatus.BAD_REQUEST.value(),
+                exc.getMessage(),
+                System.currentTimeMillis());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);   // status: 400
+    }
+
+    @ExceptionHandler(AmazonServiceException.class)
+    public ResponseEntity<StandardError> amazonService(AmazonServiceException exc, HttpServletRequest request){
+
+        HttpStatus statusCode = HttpStatus.valueOf(exc.getErrorCode());
+
+        StandardError err = new StandardError(
+                statusCode.value(),
+                exc.getMessage(),
+                System.currentTimeMillis());
+
+        return ResponseEntity.status(statusCode).body(err);   // status que vem da excetion da AWS
+    }
+
+    @ExceptionHandler(AmazonClientException.class)
+    public ResponseEntity<StandardError> amazonClient(AmazonClientException exc, HttpServletRequest request){
+        StandardError err = new StandardError(
+                HttpStatus.BAD_REQUEST.value(),
+                exc.getMessage(),
+                System.currentTimeMillis());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);   // status: 400
+    }
+
+    @ExceptionHandler(AmazonS3Exception.class)
+    public ResponseEntity<StandardError> amazonS3(AmazonS3Exception exc, HttpServletRequest request){
+        StandardError err = new StandardError(
+                HttpStatus.BAD_REQUEST.value(),
+                exc.getMessage(),
+                System.currentTimeMillis());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);   // status: 400
+    }
 
 }
