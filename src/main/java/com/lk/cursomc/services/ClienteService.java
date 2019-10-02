@@ -50,6 +50,11 @@ public class ClienteService {
     @Value("${img.prefix.client.profile}")
     private String prefix;
 
+    @Value("${img.profile.size}")
+    private Integer size;
+
+
+
     public Cliente find(Integer id){
 
         // Valida consulta, somente para o mesmo Cliente.
@@ -139,6 +144,11 @@ public class ClienteService {
 
         // Define o nome do arquivo no PADRÃO do prefix;
         BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+
+        // Tratando a imagem.
+        jpgImage = imageService.cropSquare(jpgImage);
+        jpgImage = imageService.resize(jpgImage, size);
+
         String filename = prefix + user.getId() + ".jpg";
 
         return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), filename, "image");

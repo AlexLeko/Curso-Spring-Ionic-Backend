@@ -2,6 +2,7 @@ package com.lk.cursomc.services;
 
 import com.lk.cursomc.services.exceptions.FileException;
 import org.apache.commons.io.FilenameUtils;
+import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -60,5 +61,29 @@ public class ImageService {
             throw new FileException("Erro ao ler o arquivo");
         }
     }
+
+
+    // Recortar a imagem para deixar quadrada
+    public BufferedImage cropSquare(BufferedImage sourceImg) {
+
+        // recupera o menor lado da imagem.
+        int tamanhoMinimo = (sourceImg.getHeight() <= sourceImg.getWidth()
+                            ? sourceImg.getHeight() : sourceImg.getWidth());
+
+        // Recorta a imagem em um quadrado central.
+        BufferedImage cropedImage = Scalr.crop(sourceImg,
+                                (sourceImg.getWidth() /2) - (tamanhoMinimo /2),
+                                (sourceImg.getHeight() /2) - (tamanhoMinimo /2),
+                                tamanhoMinimo, tamanhoMinimo);
+
+        return cropedImage;
+    }
+
+    // Redimenciona a imagem.
+    public BufferedImage resize(BufferedImage sourceImg, int size) {
+        return Scalr.resize(sourceImg, Scalr.Method.ULTRA_QUALITY, size);
+    }
+
+
 
 }
