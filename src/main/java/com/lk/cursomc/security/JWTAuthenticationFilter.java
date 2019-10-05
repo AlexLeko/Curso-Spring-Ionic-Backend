@@ -62,6 +62,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         // Cria no cabeçalho da requisição o Authorization com o token.
         response.addHeader("Authorization", "Bearer " + token);
+
+        // Cria o Cabeçalho AUTHORIZATION nos padrões do CORS
+        response.addHeader("access-control-expose-headers", "Authorization");
     }
 
 

@@ -105,6 +105,21 @@ public class ClienteService {
         return _clienteRepository.findAll();
     }
 
+    public Cliente findByEmail(String email) {
+
+        UserSS user = UserService.authenticated();
+        if(user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername()) ) {
+            throw new AuthorizationException("Acesso Negado");
+        }
+
+        Cliente cliente = _clienteRepository.findByEmail(email);
+        if(cliente == null) {
+            throw new ObjectNotFoundException("Cliente não encontrado! ID: " + user.getId() + ", Tipo: " + Cliente.class.getName());
+        }
+
+        return cliente;
+    }
+
     public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return _clienteRepository.findAll(pageRequest);
