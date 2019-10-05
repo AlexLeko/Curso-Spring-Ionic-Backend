@@ -37,7 +37,7 @@ public class ResourceExceptionHandler {
         StandardError err = new StandardError(
                 System.currentTimeMillis(),
                 HttpStatus.BAD_REQUEST.value(),
-                "Integridadde de Dados",
+                "Integridade de Dados",
                 exc.getMessage(),
                 request.getRequestURI());
 

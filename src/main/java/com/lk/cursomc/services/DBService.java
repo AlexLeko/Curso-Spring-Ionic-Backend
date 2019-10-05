@@ -67,8 +67,59 @@ public class DBService {
         Produto produto_10 = new Produto(null, "Pendente", 180.00);
         Produto produto_11 = new Produto(null, "Shampoo", 90.00);
 
+        // Infinity Scroll
+        Produto produto_12 = new Produto(null, "Produto 12", 10.00);
+        Produto produto_13 = new Produto(null, "Produto 13", 10.00);
+        Produto produto_14 = new Produto(null, "Produto 14", 10.00);
+        Produto produto_15 = new Produto(null, "Produto 15", 10.00);
+        Produto produto_16 = new Produto(null, "Produto 16", 10.00);
+        Produto produto_17 = new Produto(null, "Produto 17", 10.00);
+        Produto produto_18 = new Produto(null, "Produto 18", 10.00);
+        Produto produto_19 = new Produto(null, "Produto 19", 10.00);
+        Produto produto_20 = new Produto(null, "Produto 20", 10.00);
+        Produto produto_21 = new Produto(null, "Produto 21", 10.00);
+        Produto produto_22 = new Produto(null, "Produto 22", 10.00);
+        Produto produto_23 = new Produto(null, "Produto 23", 10.00);
+        Produto produto_24 = new Produto(null, "Produto 24", 10.00);
+        Produto produto_25 = new Produto(null, "Produto 25", 10.00);
+        Produto produto_26 = new Produto(null, "Produto 26", 10.00);
+        Produto produto_27 = new Produto(null, "Produto 27", 10.00);
+        Produto produto_28 = new Produto(null, "Produto 28", 10.00);
+        Produto produto_29 = new Produto(null, "Produto 29", 10.00);
+        Produto produto_30 = new Produto(null, "Produto 30", 10.00);
+        Produto produto_31 = new Produto(null, "Produto 31", 10.00);
+        Produto produto_32 = new Produto(null, "Produto 32", 10.00);
+        Produto produto_33 = new Produto(null, "Produto 33", 10.00);
+        Produto produto_34 = new Produto(null, "Produto 34", 10.00);
+        Produto produto_35 = new Produto(null, "Produto 35", 10.00);
+        Produto produto_36 = new Produto(null, "Produto 36", 10.00);
+        Produto produto_37 = new Produto(null, "Produto 37", 10.00);
+        Produto produto_38 = new Produto(null, "Produto 38", 10.00);
+        Produto produto_39 = new Produto(null, "Produto 39", 10.00);
+        Produto produto_40 = new Produto(null, "Produto 40", 10.00);
+        Produto produto_41 = new Produto(null, "Produto 41", 10.00);
+        Produto produto_42 = new Produto(null, "Produto 42", 10.00);
+        Produto produto_43 = new Produto(null, "Produto 43", 10.00);
+        Produto produto_44 = new Produto(null, "Produto 44", 10.00);
+        Produto produto_45 = new Produto(null, "Produto 45", 10.00);
+        Produto produto_46 = new Produto(null, "Produto 46", 10.00);
+        Produto produto_47 = new Produto(null, "Produto 47", 10.00);
+        Produto produto_48 = new Produto(null, "Produto 48", 10.00);
+        Produto produto_49 = new Produto(null, "Produto 49", 10.00);
+        Produto produto_50 = new Produto(null, "Produto 50", 10.00);
+        Produto produto_51 = new Produto(null, "Produto 51", 10.00);
+        Produto produto_52 = new Produto(null, "Produto 52", 10.00);
+
+
         // RELACIONAMENTO
-        categoria1.getProdutos().addAll(Arrays.asList(produto_1, produto_2, produto_3));
+        categoria1.getProdutos().addAll(Arrays.asList(
+                produto_12, produto_13, produto_14, produto_15, produto_16, produto_17, produto_18, produto_19, produto_20,
+                produto_21, produto_22, produto_23, produto_24, produto_25, produto_26, produto_27, produto_28, produto_29, produto_30,
+                produto_31, produto_32, produto_33, produto_34, produto_35, produto_36, produto_37, produto_38, produto_39, produto_40,
+                produto_41, produto_42, produto_43, produto_44, produto_45, produto_46, produto_47, produto_48, produto_49, produto_50,
+                produto_51, produto_52));
+
+        //categoria1.getProdutos().addAll(Arrays.asList(produto_1, produto_2, produto_3));
         categoria2.getProdutos().addAll(Arrays.asList(produto_2, produto_4));
         categoria3.getProdutos().addAll(Arrays.asList(produto_5, produto_6));
         categoria4.getProdutos().addAll(Arrays.asList(produto_1, produto_2, produto_3, produto_7));
@@ -89,11 +140,59 @@ public class DBService {
         produto_10.getCategorias().addAll(Arrays.asList(categoria6));
         produto_11.getCategorias().addAll(Arrays.asList(categoria7));
 
+        // infinity scroll
+        produto_12.getCategorias().add(categoria1);
+        produto_13.getCategorias().add(categoria1);
+        produto_14.getCategorias().add(categoria1);
+        produto_15.getCategorias().add(categoria1);
+        produto_16.getCategorias().add(categoria1);
+        produto_17.getCategorias().add(categoria1);
+        produto_18.getCategorias().add(categoria1);
+        produto_19.getCategorias().add(categoria1);
+        produto_20.getCategorias().add(categoria1);
+        produto_21.getCategorias().add(categoria1);
+        produto_22.getCategorias().add(categoria1);
+        produto_23.getCategorias().add(categoria1);
+        produto_24.getCategorias().add(categoria1);
+        produto_25.getCategorias().add(categoria1);
+        produto_26.getCategorias().add(categoria1);
+        produto_27.getCategorias().add(categoria1);
+        produto_28.getCategorias().add(categoria1);
+        produto_29.getCategorias().add(categoria1);
+        produto_30.getCategorias().add(categoria1);
+        produto_31.getCategorias().add(categoria1);
+        produto_32.getCategorias().add(categoria1);
+        produto_33.getCategorias().add(categoria1);
+        produto_34.getCategorias().add(categoria1);
+        produto_35.getCategorias().add(categoria1);
+        produto_36.getCategorias().add(categoria1);
+        produto_37.getCategorias().add(categoria1);
+        produto_38.getCategorias().add(categoria1);
+        produto_39.getCategorias().add(categoria1);
+        produto_40.getCategorias().add(categoria1);
+        produto_41.getCategorias().add(categoria1);
+        produto_42.getCategorias().add(categoria1);
+        produto_43.getCategorias().add(categoria1);
+        produto_44.getCategorias().add(categoria1);
+        produto_45.getCategorias().add(categoria1);
+        produto_46.getCategorias().add(categoria1);
+        produto_47.getCategorias().add(categoria1);
+        produto_48.getCategorias().add(categoria1);
+        produto_49.getCategorias().add(categoria1);
+        produto_50.getCategorias().add(categoria1);
+        produto_51.getCategorias().add(categoria1);
+        produto_52.getCategorias().add(categoria1);
+
 
         _categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2, categoria3,
                 categoria4, categoria5, categoria6, categoria7, categoria8));
-        _produtoRepository.saveAll(Arrays.asList(produto_1, produto_2, produto_3, produto_4, produto_5, produto_6,
-                produto_7, produto_8, produto_9 , produto_10, produto_11));
+        _produtoRepository.saveAll(Arrays.asList(
+                produto_1, produto_2, produto_3, produto_4, produto_5, produto_6, produto_7, produto_8, produto_9 , produto_10,
+                produto_11, produto_12, produto_13, produto_14, produto_15, produto_16, produto_17, produto_18, produto_19, produto_20,
+                produto_21, produto_22, produto_23, produto_24, produto_25, produto_26, produto_27, produto_28, produto_29, produto_30,
+                produto_31, produto_32, produto_33, produto_34, produto_35, produto_36, produto_37, produto_38, produto_39, produto_40,
+                produto_41, produto_42, produto_43, produto_44, produto_45, produto_46, produto_47, produto_48, produto_49, produto_50,
+                produto_51, produto_52));
 
 
         // CIDADE X ESTADO
