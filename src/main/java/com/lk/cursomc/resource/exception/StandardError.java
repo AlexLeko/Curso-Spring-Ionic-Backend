@@ -3,19 +3,23 @@ package com.lk.cursomc.resource.exception;
 import java.io.Serializable;
 
 public class StandardError implements Serializable {
-
-    private Integer status;
-
-    private String message;
+    private static final long serialVersionUID = 1L;
 
     private Long timeStamp;
+    private Integer status;
+    private String error;
+    private String message;
+    private String path;
 
 
-    public StandardError(Integer status, String message, Long timeStamp) {
-        this.status = status;
-        this.message = message;
+    public StandardError(Long timeStamp, Integer status, String error, String message, String path) {
         this.timeStamp = timeStamp;
+        this.status = status;
+        this.error = error;
+        this.message = message;
+        this.path = path;
     }
+
 
     public Integer getStatus() {
         return status;
@@ -41,5 +45,20 @@ public class StandardError implements Serializable {
         this.timeStamp = timeStamp;
     }
 
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
 }
