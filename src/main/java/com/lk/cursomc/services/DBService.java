@@ -223,6 +223,7 @@ public class DBService {
         cliente_2.getTelefones().addAll(Arrays.asList("1699168090", "1697141010"));
         cliente_2.addPerfis(Perfil.ADMIN);
 
+
         Endereco endereco_1 = new Endereco(null, "Rua Flores", "300", "apt 303", "Jardim", "42432433", cliente_1, cidade_1);
         Endereco endereco_2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "42432433", cliente_1, cidade_2);
         Endereco endereco_3 = new Endereco(null, "Avenida Florinda", "71", null, "Vila", "10111000", cliente_2, cidade_2);
