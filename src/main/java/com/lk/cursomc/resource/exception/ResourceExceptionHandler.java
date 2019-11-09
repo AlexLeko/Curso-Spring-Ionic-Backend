@@ -59,6 +59,7 @@ public class ResourceExceptionHandler {
             err.addError(fe.getField(), fe.getDefaultMessage());
         }
 
+        // 422 - Erro de Validação de Input.
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err); // status: 422 - não conseguiu processar as instruções
     }
 

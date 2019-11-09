@@ -3,6 +3,9 @@ package com.lk.cursomc.resource;
 import com.lk.cursomc.domain.Categoria;
 import com.lk.cursomc.dto.CategoriaDTO;
 import com.lk.cursomc.services.CategoriaService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,7 @@ public class CategoriaResource {
     private CategoriaService _service;
 
 
+    @ApiOperation(value = "Busca categoria por Id")
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public ResponseEntity<Categoria> find(@PathVariable Integer id) {
         Categoria categoria = _service.find(id);
@@ -30,6 +34,7 @@ public class CategoriaResource {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @ApiOperation(value = "Inserir Categoria")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO){
         Categoria categoria = _service.fromDTO(categoriaDTO);
@@ -44,6 +49,7 @@ public class CategoriaResource {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @ApiOperation(value = "Atualizar Categoria")
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO categoriaDTO, @PathVariable Integer id){
         Categoria categoria = _service.fromDTO(categoriaDTO);
@@ -55,6 +61,11 @@ public class CategoriaResource {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @ApiOperation(value = "Excluir Categoria")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Não é possivel excluir uma categoria que possui produtos"),
+            @ApiResponse(code = 404, message = "Código inexistente")
+    })
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         _service.delete(id);
@@ -62,6 +73,7 @@ public class CategoriaResource {
         return ResponseEntity.noContent().build();
     }
 
+    @ApiOperation(value = "Recuperar Todas as Categorias")
     @RequestMapping(method=RequestMethod.GET)
     public ResponseEntity<List<CategoriaDTO>> findAll() {
         List<Categoria> list = _service.findAll();
@@ -70,7 +82,7 @@ public class CategoriaResource {
         return ResponseEntity.ok().body(listDTO); // status: 200 OK
     }
 
-
+    @ApiOperation(value = "Consultar Categorias com Paginação")
     @RequestMapping(value = "/page", method=RequestMethod.GET)
     public ResponseEntity<Page<CategoriaDTO>> findPage(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
