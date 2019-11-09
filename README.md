@@ -35,7 +35,7 @@ Duas maneiras de iniciar a aplicação:
 
 Esta aplicação atua com três ambientes e com banco de dados diferentes para os ambientes de Teste e Desenvolvimento/Produção.
 
-Para executar a aplicação deverá informar em qual o ambiente, sendo por padrão o ambiente de Teste. Também será necessário inserir no arquivo application.properties algumas informações específicas para cada ambiente em execução:
+Para executar a aplicação deverá informar qual o ambiente de atuação, sendo por padrão o ambiente de Teste. Também será necessário inserir no arquivo application.properties algumas informações específicas para cada ambiente em execução:
 
 - Url de conexão com o banco de dados: H2 / MySql;
 - Senha da base de dados (Caso você informe, durante a criação);
@@ -45,11 +45,12 @@ Para executar a aplicação deverá informar em qual o ambiente, sendo por padr�
 - Id e senha da conta na AWS, para armazenamento das imagens na S3;
 
 ### Ambiente Teste
-- (application-test.properties)
+- `Config:` application-test.properties
 
 Durante a execução no ambiente de Teste, a aplicação executa a migration e gera uma carga inicial de dados no banco H2, sendo possível sua visualização: `Link:` http://localhost:8080/h2-console/, estes dados ficaram em memória somente durante a execução da aplicação neste ambiente.
 
 ### Ambiente Desenvolvimento / Produção
-- (application-dev.properties / application-prod.properties)
+- `Config:` application-dev.properties 
+- `Config:` application-prod.properties
 
-Já nos ambientes de Desenvolvimento e Produção, não será executada a migration e não carregará uma carga inicial de dados, nestes ambientes está sendo utilizado o MySQL.
+Já nos ambientes de Desenvolvimento ou Produção, será executada a migration somente uma única vez, para a criação da base de dados e não carregará uma carga inicial de dados, nestes ambientes está sendo utilizado o banco de dados MySQL.
